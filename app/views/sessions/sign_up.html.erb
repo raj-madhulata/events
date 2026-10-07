@@ -1,0 +1,15 @@
+<div id="clerk-sign-up"></div>
+
+<script>
+  window.addEventListener("load", async function () {
+    await Clerk.load();
+
+    Clerk.mountSignUp(
+      document.getElementById("clerk-sign-up"),
+      {
+        routing: "path",
+        path: "/sign-up"
+      }
+    );
+  });
+</script>

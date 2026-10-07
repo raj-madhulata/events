@@ -1,0 +1,50 @@
+<div>
+  <h1>Events</h1>
+
+    <% unless @events.blank? %>
+        <% @events.each do |event| %>
+            <article>
+                <h2>
+                    <%= event&.name %>
+                </h2>
+
+                <% if event.starts_at.present? %>
+                    <p>
+                    <strong>Starts:</strong>
+                    <%= event&.starts_at&.strftime("%d %B %Y, %I:%M %p") %>
+                    </p>
+                <% end %>
+
+                <% if event.description.present? %>
+                    <p>
+                    <%= truncate(event.description, length: 200) %>
+                    </p>
+                <% end %>
+                <p>Upvotes: <%= event.upvotes %> | Downvotes: <%= event.downvotes %></p>
+
+                <!-- Upvote button -->
+                <%= button_to "Upvote",
+                            upvote_event_path(event),
+                            method: :post,
+                            class: "btn btn-success" %>
+
+                <!-- Downvote button -->
+                <%= button_to "Downvote",
+                            downvote_event_path(event),
+                            method: :post,
+                            class: "btn btn-danger" %>
+
+                <% if event.public_url.present? %>
+                    <p>
+                    <%= link_to "View on Billetto", event.public_url, target: "_blank", rel: "noopener noreferrer" %>
+                    </p>
+                <% end %>
+
+            </article>
+
+            <hr>
+        <% end %>
+    <% else %>
+        <p>No events available.</p>
+    <% end %>
+</div>

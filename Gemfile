@@ -65,3 +65,5 @@ group :test do
   gem "selenium-webdriver"
 end
 gem 'dotenv', groups: [:development, :test]
+gem "rails_event_store"
+gem 'clerk-sdk-ruby', require: "clerk"

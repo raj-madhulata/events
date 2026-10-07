@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "sessions/new"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -10,5 +11,13 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  # root "posts#index"
+  root "events#index"
+  # get "/sign-in", to: "sessions#new"
+  # get "/sign-up", to: "sessions#sign_up"
+  resources :events do
+    member do
+      post :upvote, to: "votes#upvote"
+      post :downvote, to: "votes#downvote"
+    end
+  end
 end
