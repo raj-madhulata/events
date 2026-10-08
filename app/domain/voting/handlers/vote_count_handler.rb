@@ -4,10 +4,10 @@ module Voting
       def call(event)
         record = EventVoteCount.find_or_create_by(event_id: event.data[:event_id])
 
-        case event
-        when Events::EventUpvoted
+        case event.data[:event_type]
+        when "upvote"
           record.increment!(:upvotes)
-        when Events::EventDownvoted
+        when "downvote"
           record.increment!(:downvotes)
         end
       end

@@ -9,7 +9,7 @@ class UpvoteEventHandler
 
     Rails.configuration.event_store.publish(
       Events::EventUpvoted.new(
-        data: { event_id: command.event_id, user_id: command.user_id }
+        data: { event_id: command.event_id, user_id: command.user_id, event_type: "upvote" }
       ),
       stream_name: stream
     )

@@ -7,7 +7,7 @@ class VotesController < ApplicationController
       value: 1
     )
     CommandBus.new.call(command)
-    render json: { status: "ok" }
+    redirect_to events_path, notice: "Upvoted successfully"
   rescue => e
     render json: { error: e.message }, status: :unprocessable_entity
   end
@@ -19,7 +19,7 @@ class VotesController < ApplicationController
       value: -1
     )
     CommandBus.new.call(command)
-    render json: { status: "ok" }
+    redirect_to events_path, notice: "Downvoted successfully"
   rescue => e
     render json: { error: e.message }, status: :unprocessable_entity
   end

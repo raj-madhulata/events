@@ -25,7 +25,11 @@ module Events
     # config.eager_load_paths << Rails.root.join("extras")
     config.autoload_paths << Rails.root.join("app/domain")
     config.to_prepare do
-      Rails.configuration.event_store = RailsEventStore::Client.new
+      Rails.configuration.event_store = RailsEventStore::Client.new(
+        repository: RubyEventStore::ActiveRecord::EventRepository.new(
+          serializer: JSON
+        )
+      )
       Rails.configuration.event_store.subscribe(
         Voting::Handlers::VoteCountHandler.new,
         to: [Events::EventUpvoted, Events::EventDownvoted]

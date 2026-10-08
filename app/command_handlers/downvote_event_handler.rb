@@ -9,7 +9,7 @@ class DownvoteEventHandler
 
     Rails.configuration.event_store.publish(
       Events::EventDownvoted.new(
-        data: { event_id: command.event_id, user_id: command.user_id }
+        data: { event_id: command.event_id, user_id: command.user_id, event_type: "downvote" }
       ),
       stream_name: stream
     )

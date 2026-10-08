@@ -13,7 +13,7 @@ one:
   currency: MyString
 
 two:
-  external_id: MyString
+  external_id: MyString2
   name: MyString
   description: MyText
   description_html: MyText
